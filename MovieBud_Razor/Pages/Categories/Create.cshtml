@@ -1,0 +1,37 @@
+﻿@page
+@model MovieBud_Razor.Pages.Categories.CreateModel
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary"> Create Category</h2>
+            <hr/>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Category.Name"></label>
+            <input asp-for="Category.Name" class="form-control">
+            <span class="text-danger" asp-validation-for="Category.Name"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Category.DisplayOrder"></label>
+            <input asp-for="Category.DisplayOrder" class="form-control">
+            <span class="text-danger" asp-validation-for="Category.DisplayOrder"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button class="btn btn-primary form-control" type="submit"> Create</button>
+            </div>
+            <div class="col-6 text-end col-md-3">
+                <a class="btn btn-secondary border form-control" asp-page="/Categories/Index"> Back to list</a>
+            </div>
+        </div>
+    </div>
+
+</form>
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}
