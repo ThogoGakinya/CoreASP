@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MovieBud.Migrations
+namespace CoreASP.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoriesTableToDb : Migration

@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace MovieBud.Migrations
+namespace CoreASP.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class SeedingCategoriesTable : Migration

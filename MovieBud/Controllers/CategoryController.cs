@@ -1,19 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieBud.Data;
-using MovieBud.Models;
+using CoreASP.DataAccess.Data;
+using CoreASP.Models;
+using CoreASP.DataAccess.Repository;
 
 namespace MovieBud.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+        private readonly ICategoryRepository _categoryRepo;
+        public CategoryController(ICategoryRepository categoryRepob)
         {
-            _db = db;
+            _categoryRepo = categoryRepob;
         }
         public IActionResult Index()
         {
-            List<Category> categories = new List<Category>(_db.Categories);
+            List<Category> categories = new List<Category>(_categoryRepo.GetAll());
 
             return View(categories);
         }
@@ -31,8 +32,8 @@ namespace MovieBud.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
-                _db.SaveChanges();
+                _categoryRepo.Insert(obj);
+                _categoryRepo.Save();
                 TempData["success"] = "Category Added Successfully";
                 return RedirectToAction("Index");
             }
@@ -45,7 +46,7 @@ namespace MovieBud.Controllers
             {
                 return NotFound();
             }
-            Category? category = _db.Categories.Find(id);
+            Category? category = _categoryRepo.Get(u=>u.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -59,8 +60,8 @@ namespace MovieBud.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _categoryRepo.Update(obj);
+                _categoryRepo.Save(); 
                 TempData["success"] = "Category Updated Successfully";
                 return RedirectToAction("Index");
             }
@@ -74,7 +75,7 @@ namespace MovieBud.Controllers
             {
                 return NotFound();
             }
-            Category? category = _db.Categories.Find(id);
+            Category? category = _categoryRepo.Get(u=> u.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -86,16 +87,16 @@ namespace MovieBud.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteCategory(int? id)
         {
-            Category? category = _db.Categories.Find(id);
-            if (category == null)
+            Category? obj = _categoryRepo.Get(u => u.Id == id);
+            if (obj == null)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _db.Categories.Remove(category);
-                _db.SaveChanges();
+               _categoryRepo.Remove(obj);
+                _categoryRepo.Save();
                 TempData["success"] = "Category Deleted Successfully";
                 return RedirectToAction("Index");
             }

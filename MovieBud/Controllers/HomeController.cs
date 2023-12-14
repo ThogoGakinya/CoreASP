@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieBud.Models;
+using CoreASP.Models.Models;
 using System.Diagnostics;
 
 namespace MovieBud.Controllers

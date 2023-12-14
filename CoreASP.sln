@@ -5,7 +5,13 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieBud", "MovieBud\MovieBud.csproj", "{0231C4F7-72F9-46B0-A8A1-742C4F8FF62F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieBud_Razor", "MovieBud_Razor\MovieBud_Razor.csproj", "{13AA0A03-1503-4F9C-858F-6BC96B9C1063}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieBud_Razor", "MovieBud_Razor\MovieBud_Razor.csproj", "{13AA0A03-1503-4F9C-858F-6BC96B9C1063}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreASP.DataAccess", "ASPCore.Data\CoreASP.DataAccess.csproj", "{7981A8EB-1F4D-403A-B5A9-BE3FD63C7CF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreASP.Utilities", "CoreASP.Utilities\CoreASP.Utilities.csproj", "{3D3D717F-2E5E-4C1E-910C-E6192FFBE448}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreASP.Models", "CoreASP.Models\CoreASP.Models.csproj", "{7EB632FB-5479-443E-81AC-0CDCCFB4D776}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{13AA0A03-1503-4F9C-858F-6BC96B9C1063}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13AA0A03-1503-4F9C-858F-6BC96B9C1063}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13AA0A03-1503-4F9C-858F-6BC96B9C1063}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7981A8EB-1F4D-403A-B5A9-BE3FD63C7CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7981A8EB-1F4D-403A-B5A9-BE3FD63C7CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7981A8EB-1F4D-403A-B5A9-BE3FD63C7CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7981A8EB-1F4D-403A-B5A9-BE3FD63C7CF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3D717F-2E5E-4C1E-910C-E6192FFBE448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3D717F-2E5E-4C1E-910C-E6192FFBE448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3D717F-2E5E-4C1E-910C-E6192FFBE448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3D717F-2E5E-4C1E-910C-E6192FFBE448}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EB632FB-5479-443E-81AC-0CDCCFB4D776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EB632FB-5479-443E-81AC-0CDCCFB4D776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EB632FB-5479-443E-81AC-0CDCCFB4D776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EB632FB-5479-443E-81AC-0CDCCFB4D776}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

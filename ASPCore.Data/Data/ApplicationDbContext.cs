@@ -1,8 +1,9 @@
 ﻿
+using CoreASP.Models;
 using Microsoft.EntityFrameworkCore;
-using MovieBud.Models;
 
-namespace MovieBud.Data
+
+namespace CoreASP.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

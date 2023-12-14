@@ -1,4 +1,4 @@
-namespace MovieBud.Models
+namespace CoreASP.Models.Models
 {
     public class ErrorViewModel
     {
