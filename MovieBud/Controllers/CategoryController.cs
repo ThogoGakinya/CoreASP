@@ -7,14 +7,14 @@ namespace MovieBud.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository _categoryRepo;
-        public CategoryController(ICategoryRepository categoryRepob)
+        private readonly IUnitOfWork _unitofwork;
+        public CategoryController(IUnitOfWork cunitofwork)
         {
-            _categoryRepo = categoryRepob;
+            _unitofwork = cunitofwork;
         }
         public IActionResult Index()
         {
-            List<Category> categories = new List<Category>(_categoryRepo.GetAll());
+            List<Category> categories = new List<Category>(_unitofwork.Category.GetAll());
 
             return View(categories);
         }
@@ -32,8 +32,8 @@ namespace MovieBud.Controllers
             }
             if (ModelState.IsValid)
             {
-                _categoryRepo.Insert(obj);
-                _categoryRepo.Save();
+                _unitofwork.Category.Insert(obj);
+                _unitofwork.Save();
                 TempData["success"] = "Category Added Successfully";
                 return RedirectToAction("Index");
             }
@@ -46,7 +46,7 @@ namespace MovieBud.Controllers
             {
                 return NotFound();
             }
-            Category? category = _categoryRepo.Get(u=>u.Id == id);
+            Category? category = _unitofwork.Category.Get(u=>u.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -60,8 +60,8 @@ namespace MovieBud.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoryRepo.Update(obj);
-                _categoryRepo.Save(); 
+                _unitofwork.Category.Update(obj);
+                _unitofwork.Save(); 
                 TempData["success"] = "Category Updated Successfully";
                 return RedirectToAction("Index");
             }
@@ -75,7 +75,7 @@ namespace MovieBud.Controllers
             {
                 return NotFound();
             }
-            Category? category = _categoryRepo.Get(u=> u.Id == id);
+            Category? category = _unitofwork.Category.Get(u=> u.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -87,7 +87,7 @@ namespace MovieBud.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteCategory(int? id)
         {
-            Category? obj = _categoryRepo.Get(u => u.Id == id);
+            Category? obj = _unitofwork.Category.Get(u => u.Id == id);
             if (obj == null)
             {
                 return NotFound();
@@ -95,8 +95,8 @@ namespace MovieBud.Controllers
 
             if (ModelState.IsValid)
             {
-               _categoryRepo.Remove(obj);
-                _categoryRepo.Save();
+                _unitofwork.Category.Remove(obj);
+                _unitofwork.Save();
                 TempData["success"] = "Category Deleted Successfully";
                 return RedirectToAction("Index");
             }
