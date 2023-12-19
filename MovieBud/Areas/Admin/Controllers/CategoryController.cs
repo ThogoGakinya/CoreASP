@@ -3,8 +3,9 @@ using CoreASP.DataAccess.Data;
 using CoreASP.Models;
 using CoreASP.DataAccess.Repository;
 
-namespace MovieBud.Controllers
+namespace MovieBud.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitofwork;
@@ -19,14 +20,14 @@ namespace MovieBud.Controllers
             return View(categories);
         }
 
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            if (obj.Name == obj.DisplayOrder.ToString()) 
+            if (obj.Name == obj.DisplayOrder.ToString())
             {
                 ModelState.AddModelError("DisplayOrder", "Display Order can not be same as Name");
             }
@@ -42,11 +43,11 @@ namespace MovieBud.Controllers
         }
         public IActionResult Edit(int? id)
         {
-            if(id == null || id == 0) 
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            Category? category = _unitofwork.Category.Get(u=>u.Id == id);
+            Category? category = _unitofwork.Category.Get(u => u.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -61,7 +62,7 @@ namespace MovieBud.Controllers
             if (ModelState.IsValid)
             {
                 _unitofwork.Category.Update(obj);
-                _unitofwork.Save(); 
+                _unitofwork.Save();
                 TempData["success"] = "Category Updated Successfully";
                 return RedirectToAction("Index");
             }
@@ -75,7 +76,7 @@ namespace MovieBud.Controllers
             {
                 return NotFound();
             }
-            Category? category = _unitofwork.Category.Get(u=> u.Id == id);
+            Category? category = _unitofwork.Category.Get(u => u.Id == id);
             if (category == null)
             {
                 return NotFound();

@@ -2,8 +2,9 @@
 using CoreASP.Models.Models;
 using System.Diagnostics;
 
-namespace MovieBud.Controllers
+namespace MovieBud.Areas.Client.Controllers
 {
+    [Area("Client")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
