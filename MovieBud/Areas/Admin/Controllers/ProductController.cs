@@ -1,6 +1,7 @@
 ﻿using CoreASP.DataAccess.Repository;
 using CoreASP.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MovieBud.Areas.Admin.Controllers
 {
@@ -31,14 +32,14 @@ namespace MovieBud.Areas.Admin.Controllers
                 return View(product); 
             }
         }
-
-        public IActionResult Update(Product product) 
+        [HttpPost]
+        public IActionResult Edit(Product product) 
         {
             if (ModelState.IsValid)
             {
                 _unitOfWork.Product.Update(product);
                 _unitOfWork.Save();
-                TempData["success"] = "Product Addess Successfully";
+                TempData["success"] = "Product Updated Successfully";
                 return RedirectToAction("Index");
             }
             else
@@ -49,6 +50,14 @@ namespace MovieBud.Areas.Admin.Controllers
 
         public IActionResult Create() 
         {
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            });
+
+            ViewBag.CategoryList = CategoryList;
+
             return View();
         }
         [HttpPost]

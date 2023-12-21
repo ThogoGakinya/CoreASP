@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CoreASP.Models.Models;
 using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MovieBud.Areas.Client.Controllers
 {
@@ -31,3 +32,4 @@ namespace MovieBud.Areas.Client.Controllers
         }
     }
 }
+
