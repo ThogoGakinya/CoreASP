@@ -10,9 +10,11 @@ namespace MovieBud.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -49,7 +51,7 @@ namespace MovieBud.Areas.Admin.Controllers
             }
         }
 
-        public IActionResult Create() 
+        public IActionResult Upsert(int? id)
         {
             ProductVM productVM = new()
             {
@@ -60,18 +62,65 @@ namespace MovieBud.Areas.Admin.Controllers
                     Value = u.Id.ToString()
                 })
             };
+            if (id == null || id == 0) 
+            {
+                return View(productVM);
+            }
+            else 
+            {
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                if(productVM == null) 
+                {
+                    return NotFound();
+                }
+                else 
+                {
+                    return View(productVM);
+                }
 
-            return View(productVM);
+            }
         }
         [HttpPost]
-        public IActionResult Create(ProductVM obj) 
+        public IActionResult Upsert(ProductVM obj, IFormFile? file) 
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Insert(obj.Product);
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null) 
+                {
+                    string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootPath, @"images\products");
+
+                    if(!string.IsNullOrEmpty(obj.Product.ImageUrl)) 
+                    {
+                        var oldImagePath = Path.Combine(wwwRootPath, obj.Product.ImageUrl.TrimStart('\\'));
+                    
+                        if (System.IO.File.Exists(oldImagePath)) 
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
+                    using ( var filestream = new FileStream(Path.Combine(productPath, filename), FileMode.Create)) 
+                    {
+                        file.CopyTo(filestream);
+                    }
+
+                    obj.Product.ImageUrl = @"\Images\products\" + filename;
+
+                }
+                if (obj.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Insert(obj.Product);
+                }
+                else 
+                {
+                    _unitOfWork.Product.Update(obj.Product);
+                }
                 _unitOfWork.Save();
                 TempData["success"] = "Product Addess Successfully";
                 return RedirectToAction("Index");
+
             }
             else 
             {

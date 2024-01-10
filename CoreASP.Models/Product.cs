@@ -38,7 +38,7 @@ namespace CoreASP.Models
         [DisplayName("Price for 100+")]
         [Range(1, 1000, ErrorMessage = "Price must be between 1 and 100")]
         public double Price100 { get; set; }
-
+        [DisplayName("Category")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         [ValidateNever]

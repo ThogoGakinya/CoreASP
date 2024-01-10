@@ -27,4 +27,8 @@
     <ProjectReference Include="..\CoreASP.Utilities\CoreASP.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\products\" />
+  </ItemGroup>
+
 </Project>
